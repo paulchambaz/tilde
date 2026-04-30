@@ -26,6 +26,11 @@ class SettingsActivity : AppCompatActivity() {
     private var allApps: List<AppInfo> = emptyList()
     private lateinit var swipeGesture: GestureDetector
 
+    override fun onStop() {
+        super.onStop()
+        if (!isFinishing) finish()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)

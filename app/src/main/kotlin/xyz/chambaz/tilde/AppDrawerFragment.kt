@@ -143,6 +143,7 @@ class AppDrawerFragment : Fragment() {
         if (packageName.isEmpty()) return
         val intent = requireContext().packageManager.getLaunchIntentForPackage(packageName) ?: return
         etSearch.text.clear()
+        (requireActivity() as? MainActivity)?.pager?.setCurrentItem(0, false)
         startActivity(intent)
     }
 }

@@ -65,6 +65,11 @@ class MainActivity : AppCompatActivity() {
         promptDefaultLauncher()
     }
 
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        pager.setCurrentItem(0, false)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         velocityTracker.recycle()

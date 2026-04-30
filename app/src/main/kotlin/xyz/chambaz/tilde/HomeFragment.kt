@@ -83,20 +83,18 @@ class HomeFragment : Fragment() {
         }
 
         val touchSlop = ViewConfiguration.get(requireContext()).scaledTouchSlop
-        var interceptStartX = 0f
-        var interceptStartY = 0f
+        var startX = 0f
+        var startY = 0f
         var intercepting = false
         rvFavorites.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
             override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-                if (!intercepting) gesture.onTouchEvent(e)
+                gesture.onTouchEvent(e)
                 when (e.actionMasked) {
-                    MotionEvent.ACTION_DOWN -> {
-                        interceptStartX = e.x; interceptStartY = e.y; intercepting = false
-                    }
-                    MotionEvent.ACTION_MOVE -> {
-                        val dx = abs(e.x - interceptStartX)
-                        val dy = abs(e.y - interceptStartY)
-                        if (!intercepting && dx > touchSlop && dx > dy) intercepting = true
+                    MotionEvent.ACTION_DOWN -> { startX = e.x; startY = e.y; intercepting = false }
+                    MotionEvent.ACTION_MOVE -> if (!intercepting) {
+                        val dx = abs(e.x - startX)
+                        val dy = abs(e.y - startY)
+                        if (dx > touchSlop && dx > dy) intercepting = true
                     }
                     MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> intercepting = false
                 }
@@ -131,6 +129,7 @@ class HomeFragment : Fragment() {
     private fun launch(packageName: String) {
         if (packageName.isEmpty()) return
         val intent = requireContext().packageManager.getLaunchIntentForPackage(packageName) ?: return
+        (requireActivity() as? MainActivity)?.pager?.setCurrentItem(0, false)
         startActivity(intent)
     }
 }
@@ -145,7 +144,7 @@ private class FavoritesAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         VH(TextView(parent.context).apply {
             textSize = 32f
-            setTypeface(null, Typeface.BOLD)
+            setTypeface(null, Typeface.NORMAL)
             gravity = Gravity.CENTER
             setTextColor(ContextCompat.getColor(parent.context, R.color.text))
             setPadding(48, 8, 48, 8)
