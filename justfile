@@ -44,3 +44,18 @@ connect:
 # Run unit tests
 test:
     ./gradlew testDebugUnitTest
+
+# Capture screenshots of all three screens into assets/
+screenshot:
+    mkdir -p assets
+    adb -s $(adb-device) shell am start -n xyz.chambaz.tilde/.MainActivity
+    sleep 1
+    adb -s $(adb-device) exec-out screencap -p > assets/home.png
+    adb -s $(adb-device) shell input swipe 540 1400 540 200
+    sleep 1
+    adb -s $(adb-device) exec-out screencap -p > assets/drawer.png
+    adb -s $(adb-device) shell input swipe 900 700 100 700
+    sleep 1
+    adb -s $(adb-device) exec-out screencap -p > assets/settings.png
+    adb -s $(adb-device) shell input keyevent KEYCODE_BACK
+    adb -s $(adb-device) shell am start -n xyz.chambaz.tilde/.MainActivity
