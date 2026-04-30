@@ -1,8 +1,24 @@
-# Ignore Gradle project-specific cache directory
+# Gradle
 .gradle
+**/build/
 
-# Ignore Gradle build output directory
-build
+# Nix / direnv
+.direnv/
+
+# Kotlin build cache
+.kotlin/
+
+# Android
+local.properties
+
+# IDE
+.idea/
+*.iml
+
+# Claude
+CLAUDE.md
+ROADMAP.md
+.claude/
+
+# Local config
 .device
-
-.git

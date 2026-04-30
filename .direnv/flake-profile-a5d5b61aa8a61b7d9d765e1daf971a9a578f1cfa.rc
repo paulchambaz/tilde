@@ -45,7 +45,7 @@ NIX_CC='/nix/store/qd70v8g0561vm8m33kmnp79z00cgyi5n-gcc-wrapper-15.2.0'
 export NIX_CC
 NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu='1'
 export NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu
-NIX_CFLAGS_COMPILE=' -frandom-seed=fcy7c9xwz6 -isystem /nix/store/c3pl7bqrx3d2rc3dh98z6yaj0mv1p52g-openjdk-21.0.10+7/include -isystem /nix/store/zy7ssnvsg917x6b9dh8zrmjdn9h3s2rx-python3-3.13.12-env/include -isystem /nix/store/0rn2xh3zciwdr8sjg79ir79dbr6lnmfb-gnumake-4.4.1/include -isystem /nix/store/c3pl7bqrx3d2rc3dh98z6yaj0mv1p52g-openjdk-21.0.10+7/include -isystem /nix/store/zy7ssnvsg917x6b9dh8zrmjdn9h3s2rx-python3-3.13.12-env/include -isystem /nix/store/0rn2xh3zciwdr8sjg79ir79dbr6lnmfb-gnumake-4.4.1/include'
+NIX_CFLAGS_COMPILE=' -frandom-seed=45dxf03y79 -isystem /nix/store/c3pl7bqrx3d2rc3dh98z6yaj0mv1p52g-openjdk-21.0.10+7/include -isystem /nix/store/zy7ssnvsg917x6b9dh8zrmjdn9h3s2rx-python3-3.13.12-env/include -isystem /nix/store/0rn2xh3zciwdr8sjg79ir79dbr6lnmfb-gnumake-4.4.1/include -isystem /nix/store/c3pl7bqrx3d2rc3dh98z6yaj0mv1p52g-openjdk-21.0.10+7/include -isystem /nix/store/zy7ssnvsg917x6b9dh8zrmjdn9h3s2rx-python3-3.13.12-env/include -isystem /nix/store/0rn2xh3zciwdr8sjg79ir79dbr6lnmfb-gnumake-4.4.1/include'
 export NIX_CFLAGS_COMPILE
 NIX_ENFORCE_NO_NATIVE='1'
 export NIX_ENFORCE_NO_NATIVE
@@ -195,7 +195,6 @@ export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/35.0.0:$PATH
 # Fix NixOS aapt2 — tell Gradle to use the nix-patched binary instead of downloading one
 export AAPT2="$ANDROID_HOME/build-tools/35.0.0/aapt2"
 
-# Auto-generate gradle.properties for this project
 cat > gradle.properties << EOF
 android.useAndroidX=true
 android.suppressUnsupportedCompileSdk=35

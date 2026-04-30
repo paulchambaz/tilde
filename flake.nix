@@ -77,10 +77,8 @@
             export JAVA_HOME="${pkgs.jdk21}"
             export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/35.0.0:$PATH"
 
-            # Fix NixOS aapt2 — tell Gradle to use the nix-patched binary instead of downloading one
             export AAPT2="$ANDROID_HOME/build-tools/35.0.0/aapt2"
 
-            # Auto-generate gradle.properties for this project
             cat > gradle.properties << EOF
             android.useAndroidX=true
             android.suppressUnsupportedCompileSdk=35

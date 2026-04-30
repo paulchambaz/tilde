@@ -31,7 +31,7 @@ import xyz.chambaz.tilde.data.AppRepository
 
 class AppDrawerFragment : Fragment() {
 
-    private lateinit var etSearch: EditText
+    internal lateinit var etSearch: EditText
     internal lateinit var rvApps: RecyclerView
     private lateinit var tvEmpty: TextView
     private lateinit var adapter: AppsAdapter
@@ -127,9 +127,6 @@ class AppDrawerFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        etSearch.requestFocus()
-        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(etSearch, InputMethodManager.SHOW_IMPLICIT)
     }
 
     override fun onPause() {
@@ -142,6 +139,7 @@ class AppDrawerFragment : Fragment() {
     private fun launch(packageName: String) {
         if (packageName.isEmpty()) return
         val intent = requireContext().packageManager.getLaunchIntentForPackage(packageName) ?: return
+        (requireActivity() as? MainActivity)?.hideKeyboard()
         etSearch.text.clear()
         (requireActivity() as? MainActivity)?.pager?.setCurrentItem(0, false)
         startActivity(intent)

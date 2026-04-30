@@ -166,10 +166,18 @@ class MainActivity : AppCompatActivity() {
             if (pager.isFakeDragging) pager.endFakeDrag()
             return
         }
+        if (targetPage == 1) {
+            val drawer = supportFragmentManager.fragments.filterIsInstance<AppDrawerFragment>().firstOrNull()
+            drawer?.etSearch?.let { et ->
+                et.requestFocus()
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(et, InputMethodManager.SHOW_IMPLICIT)
+            }
+        }
         if (!pager.isFakeDragging) pager.beginFakeDrag()
         var last = 0f
         settleAnimator = ValueAnimator.ofFloat(0f, delta).apply {
-            duration = 350
+            duration = 100
             interpolator = DecelerateInterpolator(2f)
             addUpdateListener { anim ->
                 val value = anim.animatedValue as Float
