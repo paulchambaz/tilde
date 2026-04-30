@@ -1,6 +1,7 @@
 # tilde
 
-Minimalist Android launcher. Time, favorites, and a search bar — nothing else.
+A minimal Android launcher. Three screens: swipe up for notifications, swipe
+down for the app drawer. Home shows the time, date, and a list of favorites.
 
 <p align="center">
   <img src="assets/home.png" width="30%" />
@@ -8,22 +9,26 @@ Minimalist Android launcher. Time, favorites, and a search bar — nothing else.
   <img src="assets/settings.png" width="30%" />
 </p>
 
-## Gestures
+## Install
 
-| From home | Action |
-|-----------|--------|
-| Swipe up | Notifications |
-| Swipe down | App drawer |
-| Tap time | Configurable |
-| Tap date | Configurable |
-| Swipe left / right | Configurable |
+```sh
+just run
+```
+
+Requires a device connected over ADB. For wireless pairing:
+
+```sh
+just pair <ip> <port> <code>
+```
 
 ## Build
 
 ```sh
-just build   # compile debug APK
-just run     # install and launch
-just deploy  # release build
+just build    # debug APK
+just release  # release APK
+just test     # unit tests
 ```
 
-Requires a connected device or emulator. Use `just pair` for wireless ADB.
+## License
+
+GPL-3.0. See [LICENSE](LICENSE).
