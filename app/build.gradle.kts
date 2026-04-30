@@ -12,15 +12,19 @@ android {
         minSdk = 26
         targetSdk = 35
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
     }
 
-    signingConfigs {
-        create("release") {
-            storeFile = System.getenv("TILDE_STORE_FILE")?.let { file(it) }
-            storePassword = System.getenv("TILDE_STORE_PASSWORD")
-            keyAlias = System.getenv("TILDE_KEY_ALIAS")
-            keyPassword = System.getenv("TILDE_KEY_PASSWORD")
+    val storeFile = System.getenv("TILDE_STORE_FILE")
+
+    if (storeFile != null) {
+        signingConfigs {
+            create("release") {
+                this.storeFile = file(storeFile)
+                storePassword = System.getenv("TILDE_STORE_PASSWORD")
+                keyAlias = System.getenv("TILDE_KEY_ALIAS")
+                keyPassword = System.getenv("TILDE_KEY_PASSWORD")
+            }
         }
     }
 
@@ -28,7 +32,9 @@ android {
         release {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("release")
+            if (storeFile != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 

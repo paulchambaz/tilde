@@ -60,6 +60,23 @@ screenshot:
     adb -s $(adb-device) shell input keyevent KEYCODE_BACK
     adb -s $(adb-device) shell am start -n xyz.chambaz.tilde/.MainActivity
 
+# Bump version across all files
+bump version:
+    sed -i 's/versionName = "[0-9]\+\.[0-9]\+\.[0-9]\+"/versionName = "{{version}}"/' app/build.gradle.kts
+    sed -i "s/versionName: [0-9]\+\.[0-9]\+\.[0-9]\+/versionName: {{version}}/" xyz.chambaz.tilde.yml
+    sed -i "s/commit: v[0-9]\+\.[0-9]\+\.[0-9]\+/commit: v{{version}}/" xyz.chambaz.tilde.yml
+    sed -i "s/CurrentVersion: [0-9]\+\.[0-9]\+\.[0-9]\+/CurrentVersion: {{version}}/" xyz.chambaz.tilde.yml
+
+# Tag a release and publish APK to GitHub
+publish tag notes: release
+  git tag {{tag}}
+  git push origin {{tag}}
+  cp app/build/outputs/apk/release/app-release.apk tilde-{{tag}}.apk
+  gh release create {{tag}} tilde-{{tag}}.apk \
+    --title "{{tag}}" \
+    --notes "{{notes}}"
+  rm tilde-{{tag}}.apk
+
 # Prepare fastlane metadata images for publishing
 metadata:
   mkdir -p fastlane/metadata/android/en-US/images/phoneScreenshots
