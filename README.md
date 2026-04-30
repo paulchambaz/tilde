@@ -1,7 +1,7 @@
 # tilde
 
-A minimal Android launcher. Three screens: swipe up for notifications, swipe
-down for the app drawer. Home shows the time, date, and a list of favorites.
+A minimal Android launcher. Home screen shows time, date, and a short list of
+favorites. Swipe down for the app drawer, swipe up for notifications.
 
 <p align="center">
   <img src="assets/home.png" width="30%" />
@@ -9,26 +9,24 @@ down for the app drawer. Home shows the time, date, and a list of favorites.
   <img src="assets/settings.png" width="30%" />
 </p>
 
-## Install
-
-```sh
-just run
-```
-
-Requires a device connected over ADB. For wireless pairing:
-
-```sh
-just pair <ip> <port> <code>
-```
-
 ## Build
 
 ```sh
+just run      # install and launch on a connected device
 just build    # debug APK
 just release  # release APK
 just test     # unit tests
 ```
 
+For wireless ADB:
+
+```sh
+just pair <ip> <port> <code>
+just connect
+```
+
 ## License
 
-GPL-3.0. See [LICENSE](LICENSE).
+Tilde is free software. You can use, study, modify and distribute it under the
+terms of the [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.en.html),
+version 3 or later.
