@@ -17,7 +17,7 @@ deploy: release
 
 # Push debug APK to a connected device
 install:
-    ./gradlew installDebug
+    ./gradlew installDebug ${AAPT2:+-Pandroid.aapt2FromMavenOverride=$AAPT2}
 
 # Delete all build outputs
 clean:
@@ -76,6 +76,9 @@ bump version:
 
 # Tag a release and publish APK to GitHub
 publish tag notes: release
+  git add app/build.gradle.kts xyz.chambaz.tilde.yml
+  git commit -m "chore: bump version to {{tag}}"
+  git push origin master
   git tag {{tag}}
   git push origin {{tag}}
   cp app/build/outputs/apk/release/app-release*.apk tilde-{{tag}}.apk
