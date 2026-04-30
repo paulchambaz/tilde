@@ -1,0 +1,5 @@
+Tilde replaces the standard Android launcher with three screens navigated by vertical swipe. The home screen shows the time, date, and a short list of labeled shortcuts to your most-used apps. Swipe down to open the app drawer, which filters your installed apps as you type. Swipe up to expand the notification shade.
+
+From the home screen, tapping the time, tapping the date, swiping left, and swiping right each launch a configurable app. The settings screen is accessible from the app drawer.
+
+There are no icons, no widgets, and no wallpapers.

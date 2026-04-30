@@ -79,7 +79,17 @@
 
             export AAPT2="$ANDROID_HOME/build-tools/35.0.0/aapt2"
 
+            export TILDE_STORE_FILE="$HOME/.android/tilde-release.jks"
+            export TILDE_KEY_ALIAS="tilde"
+            export TILDE_STORE_PASSWORD="$(pass android/signing-key-password)"
+            export TILDE_KEY_PASSWORD="$(pass android/signing-key-password)"
+
             cat > gradle.properties << EOF
+            # Release signing — set these env vars before running assembleRelease:
+            # TILDE_STORE_FILE      absolute path to ~/.android/tilde-release.jks
+            # TILDE_STORE_PASSWORD
+            # TILDE_KEY_ALIAS       tilde
+            # TILDE_KEY_PASSWORD
             android.useAndroidX=true
             android.suppressUnsupportedCompileSdk=35
             android.aapt2FromMavenOverride=$AAPT2

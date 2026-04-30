@@ -45,7 +45,7 @@ connect:
 test:
     ./gradlew testDebugUnitTest
 
-# Capture screenshots of all three screens into assets/
+# Capture screenshots
 screenshot:
     mkdir -p assets
     adb -s $(adb-device) shell am start -n xyz.chambaz.tilde/.MainActivity
@@ -59,3 +59,15 @@ screenshot:
     adb -s $(adb-device) exec-out screencap -p > assets/settings.png
     adb -s $(adb-device) shell input keyevent KEYCODE_BACK
     adb -s $(adb-device) shell am start -n xyz.chambaz.tilde/.MainActivity
+
+# Prepare fastlane metadata images for publishing
+metadata:
+  mkdir -p fastlane/metadata/android/en-US/images/phoneScreenshots
+  cp assets/home.png     fastlane/metadata/android/en-US/images/phoneScreenshots/1_home.png
+  cp assets/drawer.png   fastlane/metadata/android/en-US/images/phoneScreenshots/2_drawer.png
+  cp assets/settings.png fastlane/metadata/android/en-US/images/phoneScreenshots/3_settings.png
+  magick -background none assets/icon.svg -resize 512x512 fastlane/metadata/android/en-US/images/icon.png
+
+# create signing key
+signkey:
+  keytool -genkey -v -keystore ~/.android/tilde-release.jks -alias tilde -keyalg EC -keysize 256 -validity 10000 -dname "CN=Paul Chambaz, O=Tilde, C=FR"

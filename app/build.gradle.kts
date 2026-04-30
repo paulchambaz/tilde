@@ -15,11 +15,20 @@ android {
         versionName = "1.0"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = System.getenv("TILDE_STORE_FILE")?.let { file(it) }
+            storePassword = System.getenv("TILDE_STORE_PASSWORD")
+            keyAlias = System.getenv("TILDE_KEY_ALIAS")
+            keyPassword = System.getenv("TILDE_KEY_PASSWORD")
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
