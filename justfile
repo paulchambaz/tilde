@@ -1,6 +1,6 @@
 # Install and launch the app
 run: install
-    adb -s $(cat .device) shell am start -n xyz.chambaz.testandroid/.MainActivity
+    adb -s $(adb-device) shell am start -n xyz.chambaz.tilde/.MainActivity
 
 # Compile a debug APK
 build:
@@ -9,6 +9,11 @@ build:
 # Compile a release APK
 release:
     ./gradlew assembleRelease
+
+# Install and launch a release build
+deploy: release
+    adb -s $(adb-device) install -r app/build/outputs/apk/release/app-release.apk
+    adb -s $(adb-device) shell am start -n xyz.chambaz.tilde/.MainActivity
 
 # Push debug APK to a connected device
 install:
@@ -20,22 +25,22 @@ clean:
 
 # Stream device logs filtered to this app
 log:
-    adb -s $(cat .device) logcat | grep xyz.chambaz.testandroid
+    adb -s $(adb-device) logcat | grep xyz.chambaz.tilde
 
 # List connected devices
 devices:
     adb devices
 
-# Pair and connect
-pair ip pair_port code connect_port:
+# Pair wirelessly and save ip:port to .device
+pair ip pair_port code:
     adb pair {{ip}}:{{pair_port}} {{code}}
-    echo "{{ip}}:{{connect_port}}" > .device
-    adb connect $(cat .device)
+    echo "{{ip}}:0" > .device
+    adb-device
 
 # Connect to saved device
 connect:
-    adb connect $(cat .device)
+    adb-device
 
 # Run unit tests
 test:
-    ./gradlew testDebug
+    ./gradlew testDebugUnitTest

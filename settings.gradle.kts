@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "test-android"
+rootProject.name = "tilde"
 include("app")

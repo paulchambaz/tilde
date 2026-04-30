@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 set -e
-if [[ ! -d "/home/paul/dev/android/test-android" ]]; then
+if [[ ! -d "/home/paul/dev/android/tilde" ]]; then
   echo "Cannot find source directory; Did you move it?"
-  echo "(Looking for "/home/paul/dev/android/test-android")"
+  echo "(Looking for "/home/paul/dev/android/tilde")"
   echo 'Cannot force reload with this script - use "direnv reload" manually and then try again'
   exit 1
 fi
 
 # rebuild the cache forcefully
-_nix_direnv_force_reload=1 direnv exec "/home/paul/dev/android/test-android" true
+_nix_direnv_force_reload=1 direnv exec "/home/paul/dev/android/tilde" true
 
 # Update the mtime for .envrc.
 # This will cause direnv to reload again - but without re-building.
-touch "/home/paul/dev/android/test-android/.envrc"
+touch "/home/paul/dev/android/tilde/.envrc"
 
 # Also update the timestamp of whatever profile_rc we have.
 # This makes sure that we know we are up to date.
-touch -r "/home/paul/dev/android/test-android/.envrc" "/home/paul/dev/android/test-android/.direnv"/*.rc
+touch -r "/home/paul/dev/android/tilde/.envrc" "/home/paul/dev/android/tilde/.direnv"/*.rc

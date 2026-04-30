@@ -45,13 +45,13 @@ NIX_CC='/nix/store/qd70v8g0561vm8m33kmnp79z00cgyi5n-gcc-wrapper-15.2.0'
 export NIX_CC
 NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu='1'
 export NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu
-NIX_CFLAGS_COMPILE=' -frandom-seed=7x04z0n0b0 -isystem /nix/store/c3pl7bqrx3d2rc3dh98z6yaj0mv1p52g-openjdk-21.0.10+7/include -isystem /nix/store/zy7ssnvsg917x6b9dh8zrmjdn9h3s2rx-python3-3.13.12-env/include -isystem /nix/store/0rn2xh3zciwdr8sjg79ir79dbr6lnmfb-gnumake-4.4.1/include -isystem /nix/store/c3pl7bqrx3d2rc3dh98z6yaj0mv1p52g-openjdk-21.0.10+7/include -isystem /nix/store/zy7ssnvsg917x6b9dh8zrmjdn9h3s2rx-python3-3.13.12-env/include -isystem /nix/store/0rn2xh3zciwdr8sjg79ir79dbr6lnmfb-gnumake-4.4.1/include'
+NIX_CFLAGS_COMPILE=' -frandom-seed=fcy7c9xwz6 -isystem /nix/store/c3pl7bqrx3d2rc3dh98z6yaj0mv1p52g-openjdk-21.0.10+7/include -isystem /nix/store/zy7ssnvsg917x6b9dh8zrmjdn9h3s2rx-python3-3.13.12-env/include -isystem /nix/store/0rn2xh3zciwdr8sjg79ir79dbr6lnmfb-gnumake-4.4.1/include -isystem /nix/store/c3pl7bqrx3d2rc3dh98z6yaj0mv1p52g-openjdk-21.0.10+7/include -isystem /nix/store/zy7ssnvsg917x6b9dh8zrmjdn9h3s2rx-python3-3.13.12-env/include -isystem /nix/store/0rn2xh3zciwdr8sjg79ir79dbr6lnmfb-gnumake-4.4.1/include'
 export NIX_CFLAGS_COMPILE
 NIX_ENFORCE_NO_NATIVE='1'
 export NIX_ENFORCE_NO_NATIVE
 NIX_HARDENING_ENABLE='bindnow format fortify fortify3 libcxxhardeningfast pic relro stackclashprotection stackprotector strictflexarrays1 strictoverflow zerocallusedregs'
 export NIX_HARDENING_ENABLE
-NIX_LDFLAGS='-rpath /home/paul/dev/android/test-android/outputs/out/lib  -L/nix/store/zy7ssnvsg917x6b9dh8zrmjdn9h3s2rx-python3-3.13.12-env/lib -L/nix/store/zy7ssnvsg917x6b9dh8zrmjdn9h3s2rx-python3-3.13.12-env/lib'
+NIX_LDFLAGS='-rpath /home/paul/dev/android/tilde/outputs/out/lib  -L/nix/store/zy7ssnvsg917x6b9dh8zrmjdn9h3s2rx-python3-3.13.12-env/lib -L/nix/store/zy7ssnvsg917x6b9dh8zrmjdn9h3s2rx-python3-3.13.12-env/lib'
 export NIX_LDFLAGS
 NIX_NO_SELF_RPATH='1'
 NIX_STORE='/nix/store'
@@ -146,7 +146,7 @@ name='nix-shell-env'
 export name
 nativeBuildInputs='/nix/store/6yywxw4rby9ldnf71cghdhp9vqkb860d-androidsdk /nix/store/c3pl7bqrx3d2rc3dh98z6yaj0mv1p52g-openjdk-21.0.10+7 /nix/store/wx27n954ghsisqim85w8xs2bklflfnd2-gradle-8.14.4 /nix/store/9ympg2cy0lk6z6rl995ivzqk9a5a7701-kotlin-2.3.21 /nix/store/12vqqkcq6c8ll89jkzmy10hb71hg396j-android-tools-35.0.2 /nix/store/vr4agmy8jw7f8kqynpizagdaqxy0ayw4-just-1.50.0 /nix/store/0rn2xh3zciwdr8sjg79ir79dbr6lnmfb-gnumake-4.4.1 /nix/store/c0277k5giric1mn9dklllavbzvxl6hzb-git-2.53.0 /nix/store/94pcssh34lcncs0zka4397rmnyqpb6q3-kotlin-language-server-1.3.13 /nix/store/n79gff7da457rv4kkillccsx65ry0yvg-ktfmt-0.61 /nix/store/3vxgmwzvxcw2szfkgs72qq5wyz4xdq7p-lemminx-0.31.0'
 export nativeBuildInputs
-out='/home/paul/dev/android/test-android/outputs/out'
+out='/home/paul/dev/android/tilde/outputs/out'
 export out
 outputBin='out'
 outputDev='out'
@@ -177,7 +177,7 @@ preConfigurePhases=' updateAutotoolsGnuConfigScriptsPhase'
 declare -a preFixupHooks=('_moveToShare' '_multioutDocs' '_multioutDevs' )
 preferLocalBuild='1'
 export preferLocalBuild
-prefix='/home/paul/dev/android/test-android/outputs/out'
+prefix='/home/paul/dev/android/tilde/outputs/out'
 declare -a propagatedBuildDepFiles=('propagated-build-build-deps' 'propagated-native-build-inputs' 'propagated-build-target-deps' )
 propagatedBuildInputs=''
 export propagatedBuildInputs
@@ -202,10 +202,6 @@ android.suppressUnsupportedCompileSdk=35
 android.aapt2FromMavenOverride=$AAPT2
 org.gradle.jvmargs=-Xmx4g
 EOF
-
-echo "ANDROID_HOME: $ANDROID_HOME"
-echo "JAVA_HOME:    $JAVA_HOME"
-echo "AAPT2:        $AAPT2"
 '
 export shellHook
 stdenv='/nix/store/w708nqm6lvvikrq8d3x45g96hzfij0r8-stdenv-linux'

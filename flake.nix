@@ -87,10 +87,6 @@
             android.aapt2FromMavenOverride=$AAPT2
             org.gradle.jvmargs=-Xmx4g
             EOF
-
-            echo "ANDROID_HOME: $ANDROID_HOME"
-            echo "JAVA_HOME:    $JAVA_HOME"
-            echo "AAPT2:        $AAPT2"
           '';
         };
       }
