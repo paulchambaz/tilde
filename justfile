@@ -4,11 +4,11 @@ run: install
 
 # Compile a debug APK
 build:
-    ./gradlew assembleDebug
+    ./gradlew assembleDebug ${AAPT2:+-Pandroid.aapt2FromMavenOverride=$AAPT2}
 
 # Compile a release APK
 release:
-    ./gradlew assembleRelease
+    ./gradlew assembleRelease ${AAPT2:+-Pandroid.aapt2FromMavenOverride=$AAPT2}
 
 # Install and launch a release build
 deploy: release
@@ -60,18 +60,25 @@ screenshot:
     adb -s $(adb-device) shell input keyevent KEYCODE_BACK
     adb -s $(adb-device) shell am start -n xyz.chambaz.tilde/.MainActivity
 
-# Bump version across all files
+# Bump version across all files (versionCode derived from semver)
 bump version:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    current_code=$(grep 'versionCode = ' app/build.gradle.kts | grep -o '[0-9]\+')
+    new_code=$((current_code + 1))
     sed -i 's/versionName = "[0-9]\+\.[0-9]\+\.[0-9]\+"/versionName = "{{version}}"/' app/build.gradle.kts
+    sed -i "s/versionCode = [0-9]\+/versionCode = $new_code/" app/build.gradle.kts
     sed -i "s/versionName: [0-9]\+\.[0-9]\+\.[0-9]\+/versionName: {{version}}/" xyz.chambaz.tilde.yml
+    sed -i "s/versionCode: [0-9]\+/versionCode: $new_code/" xyz.chambaz.tilde.yml
     sed -i "s/commit: v[0-9]\+\.[0-9]\+\.[0-9]\+/commit: v{{version}}/" xyz.chambaz.tilde.yml
     sed -i "s/CurrentVersion: [0-9]\+\.[0-9]\+\.[0-9]\+/CurrentVersion: {{version}}/" xyz.chambaz.tilde.yml
+    sed -i "s/CurrentVersionCode: [0-9]\+/CurrentVersionCode: $new_code/" xyz.chambaz.tilde.yml
 
 # Tag a release and publish APK to GitHub
 publish tag notes: release
   git tag {{tag}}
   git push origin {{tag}}
-  cp app/build/outputs/apk/release/app-release.apk tilde-{{tag}}.apk
+  cp app/build/outputs/apk/release/app-release*.apk tilde-{{tag}}.apk
   gh release create {{tag}} tilde-{{tag}}.apk \
     --title "{{tag}}" \
     --notes "{{notes}}"

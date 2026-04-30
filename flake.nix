@@ -92,7 +92,6 @@
             # TILDE_KEY_PASSWORD
             android.useAndroidX=true
             android.suppressUnsupportedCompileSdk=35
-            android.aapt2FromMavenOverride=$AAPT2
             org.gradle.jvmargs=-Xmx4g
             EOF
           '';
