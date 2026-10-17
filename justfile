@@ -43,7 +43,7 @@ connect:
 
 # Run unit tests
 test:
-    ./gradlew testDebugUnitTest
+    ./gradlew testDebugUnitTest ${AAPT2:+-Pandroid.aapt2FromMavenOverride=$AAPT2}
 
 # Capture screenshots
 screenshot:

@@ -21,7 +21,18 @@ Builds:
     gradle:
       - yes
 
+  - versionName: 1.0.3
+    versionCode: 4
+    commit: v1.0.3
+    subdir: app
+    sudo:
+      - apt-get update
+      - apt-get install -y openjdk-21-jdk-headless
+      - update-alternatives --auto java
+    gradle:
+      - yes
+
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^v
-CurrentVersion: 1.0.2
-CurrentVersionCode: 3
+CurrentVersion: 1.0.3
+CurrentVersionCode: 4

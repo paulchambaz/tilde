@@ -1,18 +1,18 @@
 plugins {
-    id("com.android.application") version "8.4.0"
-    id("org.jetbrains.kotlin.android") version "2.0.0"
+    id("com.android.application") version "9.4.1"
 }
 
 android {
     namespace = "xyz.chambaz.tilde"
-    compileSdk = 35
+    compileSdk = 37
+    buildToolsVersion = "37.0.0"
 
     defaultConfig {
         applicationId = "xyz.chambaz.tilde"
         minSdk = 26
-        targetSdk = 35
-        versionCode = 3
-        versionName = "1.0.2"
+        targetSdk = 36
+        versionCode = 4
+        versionName = "1.0.3"
     }
 
     val storeFile = System.getenv("TILDE_STORE_FILE")
@@ -43,19 +43,16 @@ android {
         targetCompatibility = JavaVersion.VERSION_21
     }
 
-    kotlinOptions {
-        jvmTarget = "21"
-    }
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("androidx.core:core-ktx:1.19.1")
+    implementation("androidx.appcompat:appcompat:1.8.0")
     implementation("androidx.viewpager2:viewpager2:1.1.0")
-    implementation("androidx.fragment:fragment-ktx:1.8.0")
-    implementation("androidx.datastore:datastore-preferences:1.1.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+    implementation("androidx.fragment:fragment-ktx:1.9.1")
+    implementation("androidx.datastore:datastore-preferences:1.2.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.2")
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.11.0")
     testImplementation("junit:junit:4.13.2")
 }

@@ -20,15 +20,15 @@
         };
 
         androidComposition = pkgs.androidenv.composeAndroidPackages {
-          cmdLineToolsVersion = "13.0";
-          platformToolsVersion = "35.0.2";
+          cmdLineToolsVersion = "22.0";
+          platformToolsVersion = "37.0.1";
           buildToolsVersions = [
-            "35.0.0"
-            "34.0.0"
+            "37.0.0"
+            "36.1.0"
           ];
           platformVersions = [
-            "35"
-            "34"
+            "37.0"
+            "36"
           ];
 
           includeNDK = true;
@@ -75,9 +75,9 @@
             export ANDROID_HOME="${androidSdk}/libexec/android-sdk"
             export ANDROID_SDK_ROOT="$ANDROID_HOME"
             export JAVA_HOME="${pkgs.jdk21}"
-            export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/35.0.0:$PATH"
+            export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/37.0.0:$PATH"
 
-            export AAPT2="$ANDROID_HOME/build-tools/35.0.0/aapt2"
+            export AAPT2="$ANDROID_HOME/build-tools/37.0.0/aapt2"
 
             export TILDE_STORE_FILE="$HOME/.android/tilde-release.jks"
             export TILDE_KEY_ALIAS="tilde"
@@ -91,7 +91,7 @@
             # TILDE_KEY_ALIAS       tilde
             # TILDE_KEY_PASSWORD
             android.useAndroidX=true
-            android.suppressUnsupportedCompileSdk=35
+            android.suppressUnsupportedCompileSdk=37
             org.gradle.jvmargs=-Xmx4g
             EOF
           '';
