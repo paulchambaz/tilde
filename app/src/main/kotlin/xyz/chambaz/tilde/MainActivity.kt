@@ -17,6 +17,8 @@ import android.view.ViewConfiguration
 import android.view.animation.DecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -166,14 +168,6 @@ class MainActivity : AppCompatActivity() {
             if (pager.isFakeDragging) pager.endFakeDrag()
             return
         }
-        if (targetPage == 1) {
-            val drawer = supportFragmentManager.fragments.filterIsInstance<AppDrawerFragment>().firstOrNull()
-            drawer?.etSearch?.let { et ->
-                et.requestFocus()
-                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.showSoftInput(et, InputMethodManager.SHOW_IMPLICIT)
-            }
-        }
         if (!pager.isFakeDragging) pager.beginFakeDrag()
         var last = 0f
         settleAnimator = ValueAnimator.ofFloat(0f, delta).apply {
@@ -187,12 +181,23 @@ class MainActivity : AppCompatActivity() {
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     if (pager.isFakeDragging) pager.endFakeDrag()
+                    if (targetPage == 1) showDrawerKeyboard()
                 }
                 override fun onAnimationCancel(animation: Animator) {
                     if (pager.isFakeDragging) pager.endFakeDrag()
                 }
             })
             start()
+        }
+    }
+
+    private fun showDrawerKeyboard() {
+        val drawer = supportFragmentManager.fragments.filterIsInstance<AppDrawerFragment>().firstOrNull()
+        drawer?.etSearch?.let { et ->
+            et.post {
+                et.requestFocus()
+                WindowCompat.getInsetsController(window, et).show(WindowInsetsCompat.Type.ime())
+            }
         }
     }
 

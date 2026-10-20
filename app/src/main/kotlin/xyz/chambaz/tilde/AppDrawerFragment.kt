@@ -114,24 +114,31 @@ class AppDrawerFragment : Fragment() {
             }
         })
 
+        refresh()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refresh()
+    }
+
+    private fun refresh() {
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             val apps = AppRepository.getInstalledApps(requireContext())
             withContext(Dispatchers.Main) {
+                if (apps === allApps) return@withContext
                 allApps = apps
-                visibleApps = apps
-                adapter.update(apps)
+                visibleApps = filterApps(etSearch.text.toString(), apps)
+                adapter.update(visibleApps)
                 tvEmpty.visibility = if (apps.isEmpty()) View.VISIBLE else View.GONE
             }
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     override fun onPause() {
         super.onPause()
         etSearch.text.clear()
+        etSearch.clearFocus()
         val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(etSearch.windowToken, 0)
     }

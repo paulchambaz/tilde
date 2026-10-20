@@ -68,15 +68,10 @@ bump version:
     new_code=$((current_code + 1))
     sed -i 's/versionName = "[0-9]\+\.[0-9]\+\.[0-9]\+"/versionName = "{{version}}"/' app/build.gradle.kts
     sed -i "s/versionCode = [0-9]\+/versionCode = $new_code/" app/build.gradle.kts
-    sed -i "s/versionName: [0-9]\+\.[0-9]\+\.[0-9]\+/versionName: {{version}}/" xyz.chambaz.tilde.yml
-    sed -i "s/versionCode: [0-9]\+/versionCode: $new_code/" xyz.chambaz.tilde.yml
-    sed -i "s/commit: v[0-9]\+\.[0-9]\+\.[0-9]\+/commit: v{{version}}/" xyz.chambaz.tilde.yml
-    sed -i "s/CurrentVersion: [0-9]\+\.[0-9]\+\.[0-9]\+/CurrentVersion: {{version}}/" xyz.chambaz.tilde.yml
-    sed -i "s/CurrentVersionCode: [0-9]\+/CurrentVersionCode: $new_code/" xyz.chambaz.tilde.yml
 
 # Tag a release and publish APK to GitHub
 publish tag notes: release
-  git add app/build.gradle.kts xyz.chambaz.tilde.yml
+  git add app/build.gradle.kts fastlane
   git commit -m "chore: bump version to {{tag}}"
   git push origin master
   git tag {{tag}}

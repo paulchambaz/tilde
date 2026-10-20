@@ -3,6 +3,7 @@
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR"/>
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
     <application
+        android:name=".TildeApp"
         android:label="tilde"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -23,13 +24,5 @@
             android:name=".SettingsActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
-        <receiver android:name=".PackageChangeReceiver" android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-                <action android:name="android.intent.action.PACKAGE_CHANGED" />
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
     </application>
 </manifest>
