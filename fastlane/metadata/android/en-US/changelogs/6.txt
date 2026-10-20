@@ -1,0 +1,1 @@
+No user-visible changes. The release APK no longer embeds dependency metadata.
