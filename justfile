@@ -70,12 +70,13 @@ bump version:
     sed -i "s/versionCode = [0-9]\+/versionCode = $new_code/" app/build.gradle.kts
 
 # Tag a release and publish APK to GitHub
-publish tag notes: release
+publish tag notes:
   git add app/build.gradle.kts fastlane
   git commit -m "chore: bump version to {{tag}}"
   git push origin master
   git tag {{tag}}
   git push origin {{tag}}
+  just release
   cp app/build/outputs/apk/release/app-release*.apk tilde-{{tag}}.apk
   gh release create {{tag}} tilde-{{tag}}.apk \
     --title "{{tag}}" \
