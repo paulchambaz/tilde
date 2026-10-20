@@ -1,0 +1,2 @@
+The app list now refreshes when an app is installed or removed.
+The search keyboard opens reliably when reaching the app drawer.
